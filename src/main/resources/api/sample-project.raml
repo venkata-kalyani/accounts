@@ -1,0 +1,51 @@
+#%RAML 1.0
+baseUri: /api/v1
+version: v1
+title: sample-project
+types:
+  account: !include /datatype-folder/account.raml
+  accounts: account[]
+  account-with-no-id: !include /datatype-folder/account-with-no-id.raml
+  post: !include /datatype-folder/post.raml
+/accounts:
+  get:
+    queryParameters:
+      status:
+        type: boolean
+        example: true
+    responses:
+      200:
+        body:
+          application/json:
+            type: account[]
+  post:
+    body:
+      application/json:
+        type: post
+    responses:
+      200:
+        body:
+          application/json:
+            type: account-with-no-id
+  /{id}:
+     get:
+       responses:
+         200:
+           body:
+             application/json:
+               type: account[]
+     put:
+      body:
+         application/json:
+           type: account
+      responses:
+        200:
+          body:
+            application/json:
+              type: account-with-no-id
+      
+         
+
+
+
+
